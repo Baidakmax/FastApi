@@ -17,6 +17,16 @@ class User(Base):
     is_active = Column(Boolean, default=True)
 
     items = relationship("Item", back_populates="owner")
+    tokens = relationship("Token", back_populates="user")
+
+
+class Token(Base):
+    __tablename__ = "tokens"
+    id = Column(Integer, primary_key=True, index=True)
+    access_token = Column(String, unique=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    user = relationship("User", back_populates="tokens")
+
 
 
 class Item(Base):
@@ -30,11 +40,3 @@ class Item(Base):
     owner = relationship("User", back_populates="items")
 
 
-class ItemFirst(BaseModel):
-    name: str
-    # description: Union[str, None] = None
-    description: str | None = Field(
-        default=None, title="the description of the item", max_length=300
-    )
-    price: float
-    tax: Union[float, None] = None
