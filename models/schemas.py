@@ -30,6 +30,9 @@ class UserCreate(UserBase):
         orm_mode = True
 
 
+UserAuth = UserCreate
+
+
 class LiteUser(UserBase):
     id: int
 
@@ -41,6 +44,13 @@ class User(UserBase):
     id: int
     is_active: bool
     items: List[Item] = []
+
+    class Config:
+        orm_mode = True
+
+
+class Token(BaseModel):
+    access_token: str
 
     class Config:
         orm_mode = True

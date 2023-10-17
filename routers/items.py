@@ -1,6 +1,6 @@
 from fastapi import APIRouter, BackgroundTasks
 from starlette.responses import JSONResponse
-from models.core import ItemFirst
+
 
 router = APIRouter()
 

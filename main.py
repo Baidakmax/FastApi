@@ -4,6 +4,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from routers.items import router as router_item
 from routers.users import router as router_user
+from routers.tokens import router as router_token
 
 
 
@@ -19,6 +20,11 @@ app.include_router(
     prefix="/users"
 )
 
+
+app.include_router(
+    router=router_token,
+    prefix="/tokens"
+)
 
 origins = ["http://127.0.0.1:8000/"]
 
